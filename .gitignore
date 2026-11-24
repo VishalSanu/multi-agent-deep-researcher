@@ -1,11 +1,29 @@
+# Virtual environments
 .venv/
+venv/
+ENV/
+
+# Python cache & bytecode
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
+
+# Sensitive credentials & environment files
 .env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+tvly*
+*api_key*
+*apikey*
+
+# Generated briefs and session history
 deep_research_brief_*.md
 deep_research_brief_*.json
-.pytest_cache/
 history/
-tvly*.txt
+outputs/
+
 
