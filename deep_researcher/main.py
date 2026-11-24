@@ -157,8 +157,8 @@ def main():
     parser.add_argument(
         "--model-fast",
         type=str,
-        default="gemini-2.5-flash",
-        help="Gemini model for search query generation & raw claim extraction (default: gemini-2.5-flash).",
+        default="gemini-3.8-flash",
+        help="Gemini model for search query generation & raw claim extraction (default: gemini-3.8-flash).",
     )
     parser.add_argument(
         "--model-pro",

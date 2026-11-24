@@ -16,8 +16,8 @@ class DeepResearcherOrchestrator:
 
     def __init__(
         self,
-        search_model: str = "gemini-2.5-flash",
-        fact_check_extraction_model: str = "gemini-2.5-flash",
+        search_model: str = "gemini-3.8-flash",
+        fact_check_extraction_model: str = "gemini-3.8-flash",
         fact_check_reasoning_model: str = "gemini-3.1-pro-preview",
         writer_model: str = "gemini-3.1-pro-preview",
     ):

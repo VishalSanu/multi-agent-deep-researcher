@@ -26,7 +26,7 @@ class QueryPlan(BaseModel):
 class SearcherAgent(BaseAgent):
     """Specialized agent responsible for query planning, web search, and content extraction."""
 
-    def __init__(self, model: str = "gemini-2.5-flash"):
+    def __init__(self, model: str = "gemini-3.8-flash"):
         super().__init__(name="Searcher", default_model=model)
 
     async def plan_queries(self, topic: str, context: Optional[str] = None) -> List[str]:

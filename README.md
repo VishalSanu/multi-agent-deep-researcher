@@ -13,7 +13,7 @@ The system deploys a coordinated triad of specialized agents that investigate co
          │
          ▼
  ┌─────────────────────────────────────────────────────────┐
- │ 1. SEARCHER AGENT (gemini-2.5-flash)                   │
+ │ 1. SEARCHER AGENT (gemini-3.8-flash)                    │
  │    • Deconstructs topic into 3-5 high-precision queries │
  │    • Searches via Tavily (or DuckDuckGo fallback)       │
  │    • Scrapes primary sources (.gov, .edu, arXiv, docs)  │
@@ -22,7 +22,7 @@ The system deploys a coordinated triad of specialized agents that investigate co
                            │ Scraped Documents
                            ▼
  ┌─────────────────────────────────────────────────────────┐
- │ 2. FACT-CHECKER AGENT (gemini-2.5-flash + gemini-3.1-pro-preview)   │
+ │ 2. FACT-CHECKER AGENT (gemini-3.8-flash + gemini-3.1-pro-preview)   │
  │    • Extracts atomic claims with exact verbatim quotes  │
  │    • Builds cross-document claim & credibility matrix   │
  │    • Detects empirical contradictions & nuances         │
@@ -127,7 +127,7 @@ python -m deep_researcher.main \
 | `-s`, `--max-sources` | `10` | Maximum candidate primary sources to scrape |
 | `-l`, `--max-search-loops` | `2` | Max targeted search iterations to resolve contested claims |
 | `-o`, `--output` | `deep_research_brief_<slug>.md` | Destination file for the markdown brief |
-| `--model-fast` | `gemini-2.5-flash` | Model for query planning & claim extraction |
+| `--model-fast` | `gemini-3.8-flash` | Model for query planning & claim extraction |
 | `--model-pro` | `gemini-3.1-pro-preview` | Model for conflict arbitration & final synthesis |
 | `--save-json` | `False` | Also outputs full structured claim matrix & bibliography as JSON |
 
@@ -136,21 +136,33 @@ python -m deep_researcher.main \
 ## 📦 Project Structure
 
 ```
-deep_researcher/
-├── __init__.py
-├── main.py              # Rich CLI runner & terminal reporting
-├── orchestrator.py      # Async state machine and multi-agent coordination loop
-├── models/
+├── app.py                   # Streamlit Interactive Web Studio
+├── deep_researcher/
 │   ├── __init__.py
-│   └── schemas.py       # Pydantic schemas (Claims, Conflicts, Sources, Brief)
-├── agents/
-│   ├── __init__.py
-│   ├── base.py          # Async Google GenAI SDK wrapper
-│   ├── searcher.py      # Query planning, search execution, and scraper
-│   ├── fact_checker.py  # Atomic claim extraction & conflict detection
-│   └── writer.py        # Publication-grade synthesis & citation mapping
-└── tools/
-    ├── __init__.py
-    ├── search.py        # Tavily & DuckDuckGo hybrid search
-    └── scraper.py       # Trafilatura + httpx content extraction & domain evaluator
+│   ├── main.py              # Rich CLI runner & terminal reporting
+│   ├── orchestrator.py      # Async state machine and multi-agent coordination loop
+│   ├── history_manager.py   # Research session persistence and indexing
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── schemas.py       # Pydantic schemas (Claims, Conflicts, Sources, Brief)
+│   ├── agents/
+│   │   ├── __init__.py
+│   │   ├── base.py          # Async Google GenAI SDK wrapper
+│   │   ├── searcher.py      # Query planning, search execution, and scraper
+│   │   ├── fact_checker.py  # Atomic claim extraction & conflict detection
+│   │   └── writer.py        # Publication-grade synthesis & citation mapping
+│   └── tools/
+│       ├── __init__.py
+│       ├── search.py        # Tavily & DuckDuckGo hybrid search
+│       └── scraper.py       # Trafilatura + httpx content extraction & domain evaluator
+├── history/                 # Saved sessions (.json and .md outputs)
+├── tests/                   # Pytest test suite
+└── LICENSE                  # MIT License
 ```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](file:///e:/Vishal/SideProject/LICENSE) file for details.
+

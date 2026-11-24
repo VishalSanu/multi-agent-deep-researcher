@@ -17,9 +17,11 @@ except ImportError:
 DEPRECATED_MODEL_MAP = {
     "gemini-2.5-pro": "gemini-3.1-pro-preview",
     "gemini-1.5-pro": "gemini-3.1-pro-preview",
+    "gemini-2.5-flash": "gemini-3.8-flash",
     "gemini-2.5-flash-lite": "gemini-3.8-flash",
     "models/gemini-2.5-pro": "gemini-3.1-pro-preview",
     "models/gemini-1.5-pro": "gemini-3.1-pro-preview",
+    "models/gemini-2.5-flash": "gemini-3.8-flash",
 }
 
 
@@ -34,7 +36,7 @@ T = TypeVar("T", bound=BaseModel)
 class BaseAgent:
     """Base class for all specialized agents in the deep researcher team."""
 
-    def __init__(self, name: str, default_model: str = "gemini-2.5-flash"):
+    def __init__(self, name: str, default_model: str = "gemini-3.8-flash"):
         self.name = name
         self.default_model = resolve_model(default_model)
         api_key = os.getenv("GEMINI_API_KEY", "").strip()

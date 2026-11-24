@@ -41,7 +41,7 @@ class CrossReferenceAnalysis(BaseModel):
 class FactCheckerAgent(BaseAgent):
     """Specialized agent that audits sources, constructs claim matrices, and detects factual conflicts."""
 
-    def __init__(self, extraction_model: str = "gemini-2.5-flash", reasoning_model: str = "gemini-3.1-pro-preview"):
+    def __init__(self, extraction_model: str = "gemini-3.8-flash", reasoning_model: str = "gemini-3.1-pro-preview"):
         super().__init__(name="FactChecker", default_model=reasoning_model)
         self.extraction_model = extraction_model
         self.reasoning_model = reasoning_model

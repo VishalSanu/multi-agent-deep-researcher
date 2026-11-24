@@ -91,7 +91,7 @@ def test_gemini_connection(api_key: str) -> tuple[bool, str]:
         from google import genai
         client = genai.Client(api_key=api_key, http_options={"api_version": "v1beta"})
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3.8-flash",
             contents="Say 'OK'",
         )
         if response and response.text:
@@ -160,13 +160,13 @@ with st.sidebar:
     with st.expander("🤖 Model Selection"):
         model_fast = st.selectbox(
             "Fast / Extraction Model",
-            options=["gemini-2.5-flash", "gemini-3.8-flash"],
+            options=["gemini-3.8-flash"],
             index=0,
             help="Used for query planning, text chunking, and raw claim extraction.",
         )
         model_pro = st.selectbox(
             "Reasoning / Synthesis Model",
-            options=["gemini-3.1-pro-preview", "gemini-3.8-flash", "gemini-2.5-flash"],
+            options=["gemini-3.1-pro-preview", "gemini-3.8-flash"],
             index=0,
             help="Used for conflict arbitration, deep reasoning, and final narrative synthesis.",
         )
