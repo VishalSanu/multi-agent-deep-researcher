@@ -211,6 +211,11 @@ st.markdown(
 if "current_brief" not in st.session_state:
     st.session_state["current_brief"] = None
 
+# Callback to safely set topic suggestions before widget instantiation
+def set_topic_suggestion(topic: str):
+    st.session_state["topic_input"] = topic
+
+
 # Topic Input Section
 col_input, col_btn = st.columns([4, 1])
 with col_input:
@@ -230,17 +235,26 @@ with col_btn:
 st.caption("Quick suggestions:")
 chip_cols = st.columns(3)
 with chip_cols[0]:
-    if st.button("🔋 Solid-State vs LFP Storage", use_container_width=True):
-        st.session_state["topic_input"] = "Solid-State Batteries vs Lithium-Iron-Phosphate for Grid-Scale Storage"
-        st.rerun()
+    st.button(
+        "🔋 Solid-State vs LFP Storage",
+        use_container_width=True,
+        on_click=set_topic_suggestion,
+        args=("Solid-State Batteries vs Lithium-Iron-Phosphate for Grid-Scale Storage",),
+    )
 with chip_cols[1]:
-    if st.button("🧬 mRNA Cancer Vaccines Efficacy", use_container_width=True):
-        st.session_state["topic_input"] = "Efficacy of mRNA Cancer Vaccines: Clinical Trial Outcomes vs Immune Tolerance"
-        st.rerun()
+    st.button(
+        "🧬 mRNA Cancer Vaccines Efficacy",
+        use_container_width=True,
+        on_click=set_topic_suggestion,
+        args=("Efficacy of mRNA Cancer Vaccines: Clinical Trial Outcomes vs Immune Tolerance",),
+    )
 with chip_cols[2]:
-    if st.button("⚛️ Quantum Error Correction", use_container_width=True):
-        st.session_state["topic_input"] = "Fault-Tolerant Quantum Computing: Neutral Atoms vs Superconducting Qubits"
-        st.rerun()
+    st.button(
+        "⚛️ Quantum Error Correction",
+        use_container_width=True,
+        on_click=set_topic_suggestion,
+        args=("Fault-Tolerant Quantum Computing: Neutral Atoms vs Superconducting Qubits",),
+    )
 
 st.markdown("---")
 
